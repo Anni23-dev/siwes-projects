@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Anni_Zy's Cosmetics</title>
+    <link rel="stylesheet" href="js.css">
+</head>
+<body>
+    <nav>
+        <h1>Anni_Zy's cosmetics🌸</h1>
+        <div class="hero">
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html">Home</a></li>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        
+        <div class="form-box" id="login-form">
+            <h2>Sign In</h2>
+            <form onsubmit="return false;">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="login-email" required>
+
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password" required>
+
+                <button type="submit" onclick="login()">Login</button>
+                <p>Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+            </form>
+        </div>
+
+        <div class="form-box" id="signup-form" style="display: none;">
+            <h2>Create Account</h2>
+            <form onsubmit="return false;">
+                <label for="signup-name">Name:</label>
+                <input type="text" id="signup-name" name="signup-name" required>
+
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" name="signup-email" required>
+
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" name="signup-password" required>
+
+                <button type="submit" onclick="signup()">Sign Up</button>
+                <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+            </form>
+        </div>
+    </div>
+    <style>
+       .form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-box h2 {
+    text-align: center;
+    color: #d63384;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #d63384;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #c82373;
+}
+
+p {
+    text-align: center;
+}
+
+nav {
+    background-color: palevioletred;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav li{
+    list-style-type: none;
+    color: black;
+    margin: 4%;
+    padding: 13%;
+    font-size: 150%;
+    border: none;
+}
+nav li a{
+    color: #ddd;
+    text-decoration: none;
+}
+nav li a:hover{
+    background-color: rgb(207, 21, 83);
+    padding: 4px;
+    border: none;
+    border-radius: 5px;
+    transition: all ease 0.5s;
+}
+.hero{
+    display: flex;
+    margin-right: 10%;
+}
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .hero {
+        flex-direction: column;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    nav li {
+        font-size: 16px;
+        padding: 8px 0;
+        margin: 0;
+    }
+
+    .form-container {
+        margin: 30px 15px;
+        padding: 15px;
+    }
+
+    .form-box h2 {
+        font-size: 1.5em;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    button {
+        font-size: 15px;
+        padding: 8px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav li {
+        font-size: 14px;
+    }
+
+    .form-container {
+        margin: 20px 10px;
+        padding: 12px;
+    }
+
+    .form-box h2 {
+        font-size: 1.3em;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    button {
+        font-size: 14px;
+        padding: 7px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+}
+
+ 
+    </style>
+
+    <script>
+        function showSignup() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            alert(`Logged in as: ${email}`);
+        }
+
+        function signup() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            alert(`Account created for: ${name}`);
+        }
+    </script>
+</body>
+</html>
