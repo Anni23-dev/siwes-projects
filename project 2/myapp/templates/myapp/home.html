@@ -1,0 +1,49 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <p class="kicker">WELCOME</p>
+      <h1>STUDENT<br>FEEDBACK AND<br>REVIEW SYSTEM</h1>
+      <p class="lead">A complete solution for student management.</p>
+      <a href="#join" class="btn btn-pink">Read more</a>
+    </div>
+    <img src="{% static 'myapp/images/hero.jpg' %}" alt="Students" class="hero-img">
+  </div>
+</section>
+
+<section class="welcome container">
+  <h2>WELCOME TO STUDENT FEEDBACK REVIEW SYSTEM</h2>
+  <div class="cards">
+    <article class="card">
+      <img src="{% static 'myapp/images/events.jpg' %}" alt="">
+      <div class="card-body"><h3>Campus Events</h3><p>Stay in the loop with campus life.</p></div>
+    </article>
+    <article class="card">
+      <img src="{% static 'myapp/images/community.jpg' %}" alt="">
+      <div class="card-body"><h3>Student Community</h3><p>A diverse network of learners.</p></div>
+    </article>
+    <article class="card">
+      <img src="{% static 'myapp/images/faculty.jpg' %}" alt="">
+      <div class="card-body"><h3>Faculty Insight</h3><p>Reviews that lead to real improvements.</p></div>
+    </article>
+  </div>
+</section>
+
+<section id="join" class="join">
+  <div class="container">
+    <h2>Join Our Network</h2>
+    <p class="join-sub">Complete the form below to establish your profile dashboard.</p>
+    <form method="post" class="join-form">
+      {% csrf_token %}
+      <label>NAME {{ form.name }}</label>
+      <label>EMAIL {{ form.email }}</label>
+      <label>AGE {{ form.age }}</label>
+      <button type="submit" class="btn-submit">INITIALIZE DEPLOYMENT PROFILE</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

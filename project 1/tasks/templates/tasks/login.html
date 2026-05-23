@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+<html>
+<head>
+    <title>Log In - NexGen Automator</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .auth-box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 350px; }
+        h2 { margin-top: 0; color: #2c3e50; }
+        button { background: #2c3e50; color: white; border: none; padding: 10px; width: 100%; cursor: pointer; border-radius: 4px; font-weight: bold; margin-top: 15px; }
+        p { text-align: center; margin-top: 15px; font-size: 14px; }
+        a { color: #3498db; text-decoration: none; }
+        .alert { background: #e74c3c; color: white; padding: 8px; margin-bottom: 15px; border-radius: 4px; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="auth-box">
+        <h2>Log In</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log In</button>
+        </form>
+        <p>New here? <a href="{% url 'register' %}">Create an account</a></p>
+    </div>
+</body>
+</html>

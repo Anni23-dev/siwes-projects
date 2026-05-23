@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Student Feedback Review System</title>
+<!-- Inside base.html inside the <head> tags -->
+<link rel="stylesheet" href="{% static 'myapp/css/style.css' %}?v=1.1" />
+
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="/" class="logo">Student Feedback Review System</a>
+      <nav>
+        <a href="#">Home</a><a href="#">About</a>
+        <a href="#">Student Login</a><a href="#">Faculty Login</a>
+        <a href="#">Admin Login</a><a href="#">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer class="site-footer">
+    <div class="container">© Student Feedback Review System</div>
+  </footer>
+</body>
+</html>

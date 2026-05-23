@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink & Purple To-Do App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #a1c4fd 100%);
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(154, 18, 179, 0.2);
+            width: 100%;
+            max-width: 450px;
+            border: 2px solid #d8b4fe;
+        }
+
+        h1 {
+            color: #701a75;
+            text-align: center;
+            margin-top: 0;
+            font-size: 2rem;
+        }
+
+        form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #f472b6;
+            border-radius: 10px 0 0 10px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus {
+            border-color: #a21caf;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #ec4899;
+            color: white;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #db2777;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #fdf2f8;
+            border-left: 5px solid #a21caf;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 0 10px 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .delete-btn {
+            color: #be185d;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .delete-btn:hover {
+            background-color: #fce7f3;
+        }
+
+        .empty-msg {
+            text-align: center;
+            color: #bc6ff1;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>My To-Do List 🌸</h1>
+        
+        <!-- Form to Add Tasks -->
+        <form action="/add" method="POST">
+            <input type="text" name="title" placeholder="What needs to be done?" required autocomplete="off">
+            <button type="submit">Add</button>
+        </form>
+
+        <!-- List of Tasks -->
+        <ul>
+            {% for todo in todo_list %}
+            <li>
+                <span>{{ todo.title }}</span>
+                <a class="delete-btn" href="/delete/{{ todo.id }}">✕</a>
+            </li>
+            {% else %}
+            <p class="empty-msg">No tasks yet. Enjoy your day! ✨</p>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>

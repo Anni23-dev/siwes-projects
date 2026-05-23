@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+<html>
+<head>
+    <title>NexGen Automator</title>
+        <div style="background: #2c3e50; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <span>Logged in as: <strong>{{ user.username }}</strong></span>
+        <div>
+            <!-- Logout Action -->
+            <a href="{% url 'logout' %}" style="color: white; margin-right: 20px; text-decoration: none; font-weight: bold;">Log Out</a>
+            
+            <!-- Delete Entire User Account -->
+            <form action="{% url 'delete_account' %}" method="POST" style="display: inline;" onsubmit="return confirm('⚠️ WARNING: Deleting your account will permanently erase your profile and all automated tasks. Proceed?');">
+                {% csrf_token %}
+                <button type="submit" style="background: #c0392b; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px;">Delete Account</button>
+            </form>
+        </div>
+    </div>
+
+    <h1>🤖 NexGen Automator Dashboard</h1>
+    <p>Welcome to your automation hub! Here you can create, track, and manage all your automation tasks in one place.</p>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 20px; }
+        .container { display: flex; gap: 20px; }
+        .box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex: 1; }
+        h2 { margin-top: 0; color: #2c3e50; }
+        .task-card { background: #ecf0f1; padding: 15px; border-radius: 6px; margin-bottom: 10px; }
+        .task-card.pending { border-left: 5px solid #e67e22; }
+        .task-card.in_progress { border-left: 5px solid #2980b9; }
+        .task-card.completed { border-left: 5px solid #27ae60; }
+        button { background: #2980b9; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; }
+        select { padding: 5px; border-radius: 4px; border: 1px solid #bdc3c7; }
+        .alert { background: #e74c3c; color: white; padding: 10px; margin-bottom: 15px; border-radius: 4px; font-size: 14px; }
+    </style>
+    <!-- Dynamic Feedback Messages Engine -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="container">
+        <!-- Task Submission Engine -->
+        <div class="box">
+            <h2>Add New Automation Task</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" name="submit_task" style="background:#2c3e50; color:white; padding:10px 15px; border:none; cursor:pointer;">Capture Task</button>
+            </form>
+        </div>
+
+        <!-- Real-time Progress Tracking System -->
+        <div class="box">
+            <h2>Active Automation Pipeline</h2>
+            {% for task in tasks %}
+                <div class="task-card {{ task.status }}">
+                    <h3>{{ task.title }}</h3>
+                    <p>{{ task.description }}</p>
+                    <small>Status: <strong>{{ task.status|title }}</strong></small>
+                    
+                    <!-- Quick Progress Update Form -->
+                    <form method="POST" style="margin-top: 10px;">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_id" value="{{ task.id }}">
+                        <select name="status">
+                            <option value="pending" {% if task.status == 'pending' %}selected{% endif %}>Pending</option>
+                            <option value="in_progress" {% if task.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                            <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>Completed</option>
+                        </select>
+                        <button type="submit" name="update_status">Update</button>
+                    </form>
+                    <!-- NEW: Delete Task Form -->
+                    <form action="{% url 'delete_task' task.id %}" method="POST" style="display: inline-block; margin-left: 10px;" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                        {% csrf_token %}
+                        <button type="submit" style="background: #e74c3c; color: white; border: none; padding: 2px 8px; cursor: pointer; border-radius: 3px;">Delete</button>
+                    </form>
+                </div>
+            {% empty %}
+                <p>No tasks inside the automation pipeline.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
